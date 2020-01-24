@@ -52,7 +52,7 @@
         var xobstacle = 650;
         var yobstacle = 10;
         var speedXobstacle = -10;
-        var car, obstacles;
+        var car, obstacles,interval;
         ctx.fillStyle = 'green';
 
 
@@ -67,9 +67,6 @@
         reset.onclick=function(){
             interval = clearInterval(interval);
             start();
-            ctx.clearRect(0,0, canvas.width, canvas.height);
-            drawRoad();
-            drawCar();
         }
         
         //ctx.fillRect(10, 10, 100, 100);
@@ -99,6 +96,11 @@
             for (var i = 0; i<= 2; i++) {
                 obstacles.push(new Obstacle(-obstacleImage.width, yobstacle + i * 125, obstacleImage));
             }
+
+
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            drawRoad();
+            drawCar();
         }
        
 
@@ -163,11 +165,11 @@
         function drawRoad() {
             ctx.drawImage(route, -1, -3);
         }
-        carImage.onload = drawCar;
+        //carImage.onload = drawCar;
 
-        obstacleImage.onload = drawObstacles;
+        //obstacleImage.onload = drawObstacles;
 
-        route.onload = drawRoad();
+        route.onload = drawRoad;
 
         function collide(a, b) {
             return !(
@@ -244,8 +246,7 @@
             drawCar();
         }
 
-        start(); 
-
+        setTimeout(start, 100);
 
     </script>
 </body>
