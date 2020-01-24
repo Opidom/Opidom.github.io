@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)file:///C:/Users/Gaston/Desktop/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="file:///C:/Users/Gaston/Desktop/css/bootstrap.min.css">
+    <link rel="stylesheet" href="file:///C:/Users/Gaston/Desktop/css/app.css">
+
+  </head>
+  <body>
+
+	<input type="text" id="chiffre1" class="chiffre">
+	<input type="text" id="chiffre2" class="chiffre">
+	<input type="text" id="chiffre3" class="chiffre">
+	<input type="text" id="chiffre4" class="chiffre">
+	<input type="text" id="chiffre5" class="chiffre">
+	<button id="calculate" class="btn btn-primary btn-lg"> Calculer </button>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./index_files/jquery-3.4.1.slim.min.js.téléchargement" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="./index_files/popper.min.js.téléchargement" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="./index_files/bootstrap.min.js.téléchargement" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+ <script type="text/javascript">
+   var lastname = 'Boidin';
+
+   var firstname = '2';
+   var fullname=firstname + lastname;
+
+   var button = document.getElementById('calculate');
+  	
+   function clickButton(){
+  	var chiffres = document.getElementsByClassName('chiffre');
+
+  	var total = 0;
+  	for (var i = chiffres.length - 1; i >= 0; i--) {
+  		console.log(i, chiffres[i]);
+  		total = total + parseInt(chiffres[i].value);
+  	}
+  	alert(total);
+  	}
+
+	button.onclick=clickButton;
+
+  </script>
+
+  
+</body></html>
