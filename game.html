@@ -17,7 +17,7 @@
     </style>
   </head>
   <body>
-    <h1>my game</h1>
+    <h1>Mon jeu</h1>
     <div class="container-fluid">
       <div class="row">
         <div class="col text-center">
@@ -26,11 +26,24 @@
       </div>
     </div>
 
+    <button type="button" id="play" class="btn btn-danger btn-lg btn-block">Play</button>
+    <button type="button" id="pause" class="btn btn-danger btn-lg btn-block">Pause</button>
+    <button type="button" id="reset" class="btn btn-warning btn-lg btn-block">Reset</button>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+  
     <script type="text/javascript" src="js/Car.js"></script>
     <script type="text/javascript" src="js/Obstacle.js"></script>
 
     <script type="text/javascript">
         var canvas = document.getElementById("myGame");
+        var playButton = document.getElementById("play");
         var ctx = canvas.getContext("2d");
         var xcar = 10;
         var ycar = 10;
@@ -39,7 +52,25 @@
         var xobstacle = 650;
         var yobstacle = 10;
         var speedXobstacle = -10;
+        var car, obstacles;
         ctx.fillStyle = 'green';
+
+
+        play.onclick=function(){
+            if (!interval){
+                interval = setInterval(draw, 50);
+            }
+        }
+        pause.onclick=function(){
+            interval = clearInterval(interval);
+        }
+        reset.onclick=function(){
+            interval = clearInterval(interval);
+            start();
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            drawRoad();
+            drawCar();
+        }
         
         //ctx.fillRect(10, 10, 100, 100);
 
@@ -54,13 +85,23 @@
         obstacleImage.width=80;
         obstacleImage.src = 'images/stop2.svg';
 
-        var car = new Car(xcar, ycar, carImage);
-        var obstacles = [];
+        function start(){
+            xcar = 10;
+            ycar = 10;
+            speedYcar = 0;
+            speedXcar = 0;
+            xobstacle = 650;
+            yobstacle = 10;
+            speedXobstacle = -10;
+            car = new Car(xcar, ycar, carImage);
+            obstacles = [];
 
-        for (var i = 0; i<= 2; i++) {
-            obstacles.push(new Obstacle(-obstacleImage.width, yobstacle + i * 125, obstacleImage));
+            for (var i = 0; i<= 2; i++) {
+                obstacles.push(new Obstacle(-obstacleImage.width, yobstacle + i * 125, obstacleImage));
+            }
         }
-        
+       
+
         function keydownEvent(e) {
             if (e.key=="Up" || e.key=="ArrowUp") {
                speedYcar=-10; 
@@ -75,17 +116,39 @@
             else if (e.key=="Left" || e.key=="ArrowLeft") {
                 speedXcar=-10;
             }
+           
+            if (e.key=="p") {
+                if (interval) {
+                    interval = clearInterval(interval);
+                } 
+            else if (e.key=="p") { 
+                interval = setInterval(draw, 50);
+                }
+            }
         }
+
+
 
         function keyupEvent(e) {
-            speedYcar=0;
-            speedXcar=0;
+            if (e.key=="Up" || e.key=="ArrowUp") {
+                speedYcar=0;
+            }
+            if (e.key=="Down" || e.key=="ArrowDown") {
+                speedYcar=0; 
+            }
+            if (e.key=="Right" || e.key=="ArrowRight") {
+                speedXcar=0;
+            }
+            if (e.key=="Left" || e.key=="ArrowLeft") {
+                speedXcar=0;
+            }
         }
 
-        
+
+
         document.addEventListener('keydown', keydownEvent);
         document.addEventListener('keyup', keyupEvent);
-        
+
         function drawCar() {
             ctx.drawImage(car.image, car.x(), car.y());
         };
@@ -181,7 +244,9 @@
             drawCar();
         }
 
+        start();
         var interval = setInterval(draw, 50); 
+
 
     </script>
 </body>
